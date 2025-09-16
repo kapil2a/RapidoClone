@@ -1,0 +1,319 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Racing Theme CSS Variables */
+:root {
+  /* F1 Theme Colors */
+  --f1-red: #e10600;
+  --f1-black: #15151e;
+  --f1-silver: #c0c0c0;
+  --f1-white: #ffffff;
+
+  /* MotoGP Theme Colors */
+  --motogp-neon: #00ff00;
+  --motogp-orange: #ff6600;
+  --motogp-blue: #0066ff;
+  --motogp-electric: #00ffff;
+
+  /* Custom Properties */
+  --racing-glow: 0 0 20px currentColor;
+  --speed-blur: blur(1px);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-inter);
+  background: linear-gradient(135deg, #15151e 0%, #2a2a3e 50%, #15151e 100%);
+  overflow-x: hidden;
+}
+
+/* Racing Typography */
+.font-racing {
+  font-family: var(--font-racing);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.font-speed {
+  font-family: var(--font-speed);
+  font-weight: 600;
+}
+
+/* Racing UI Components */
+.racing-card {
+  @apply bg-gradient-to-br from-gray-800/90 to-gray-900/90 border border-gray-700/50 rounded-xl backdrop-blur-sm;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.racing-card:hover {
+  @apply border-f1-red/50;
+  box-shadow: 0 0 30px rgba(225, 6, 0, 0.2);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Racing Buttons */
+.btn-racing {
+  @apply relative px-6 py-3 font-racing text-sm bg-gradient-to-r from-f1-red to-red-700 text-white rounded-lg overflow-hidden;
+  box-shadow: 0 0 20px rgba(225, 6, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-racing::before {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-racing:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-racing:hover {
+  box-shadow: 0 0 30px rgba(225, 6, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-motogp {
+  @apply btn-racing bg-gradient-to-r from-motogp-neon to-green-500;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.btn-motogp:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+}
+
+/* Racing Start Lights */
+.racing-lights {
+  @apply flex justify-center space-x-2 p-4;
+}
+
+.start-light {
+  @apply w-8 h-8 rounded-full border-2 border-gray-600 bg-gray-800;
+  transition: all 0.3s ease;
+}
+
+.start-light.active {
+  @apply bg-red-500 border-red-400;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+.start-light.go {
+  @apply bg-green-500 border-green-400;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+/* Checkered Flag Pattern */
+.checkered-bg {
+  background-image: linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(-45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Racing Track Background */
+.racing-track-bg {
+  background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(225, 6, 0, 0.1) 50%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 50px,
+      rgba(255, 255, 255, 0.1) 52px,
+      rgba(255, 255, 255, 0.1) 54px
+    ),
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(21, 21, 30, 1) 100%
+    );
+}
+
+/* Speed Lines Effect */
+.speed-lines {
+  position: relative;
+  overflow: hidden;
+}
+
+.speed-lines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(225, 6, 0, 0.3) 50%,
+    transparent 100%
+  );
+  animation: speed-line 2s linear infinite;
+}
+
+@keyframes speed-line {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Racing Glow Effects */
+.racing-glow-red {
+  box-shadow: 0 0 20px rgba(225, 6, 0, 0.5);
+}
+
+.racing-glow-green {
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.racing-glow-blue {
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+}
+
+/* Vehicle Icons Animation */
+.vehicle-icon {
+  @apply inline-block text-2xl;
+  filter: drop-shadow(0 0 10px currentColor);
+  animation: vehicle-move 3s ease-in-out infinite;
+}
+
+@keyframes vehicle-move {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+}
+
+/* Badge Styles */
+.racing-badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-racing;
+  background: linear-gradient(
+    135deg,
+    rgba(225, 6, 0, 0.2),
+    rgba(225, 6, 0, 0.1)
+  );
+  border: 1px solid rgba(225, 6, 0, 0.3);
+  box-shadow: 0 0 10px rgba(225, 6, 0, 0.2);
+}
+
+.badge-legendary {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.3),
+    rgba(255, 215, 0, 0.1)
+  );
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.badge-epic {
+  background: linear-gradient(
+    135deg,
+    rgba(138, 43, 226, 0.3),
+    rgba(138, 43, 226, 0.1)
+  );
+  border-color: rgba(138, 43, 226, 0.5);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+/* Loading Animations */
+.racing-loader {
+  @apply w-8 h-8 border-4 border-gray-700 border-t-f1-red rounded-full;
+  animation: racing-spin 1s linear infinite;
+}
+
+@keyframes racing-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Map Styles */
+.racing-map {
+  @apply relative bg-gray-900 rounded-xl overflow-hidden;
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(225, 6, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .racing-card {
+    @apply mx-4;
+  }
+
+  .font-racing {
+    font-size: 0.875rem;
+  }
+
+  .vehicle-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .vehicle-icon,
+  .speed-lines::before,
+  .racing-loader {
+    animation: none;
+  }
+
+  .btn-racing::before {
+    display: none;
+  }
+}
+
+/* Focus States */
+.btn-racing:focus,
+.racing-card:focus {
+  @apply outline-none ring-2 ring-f1-red/50 ring-offset-2 ring-offset-gray-900;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-f1-red rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-red-600;
+}

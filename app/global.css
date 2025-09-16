@@ -1,0 +1,105 @@
+/* Dynamic racing background vehicles */
+.racing-vehicles-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.racing-vehicles-bg .vehicle {
+  position: absolute;
+  opacity: 0.08;
+  filter: blur(0.5px) saturate(0.9);
+  background-repeat: no-repeat;
+  background-size: contain;
+  will-change: transform, opacity;
+}
+.racing-vehicles-bg .vehicle.f1 {
+  left: -10%;
+  bottom: 5%;
+  width: 60vw;
+  height: 30vw;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 256' fill='none'><path d='M10 170h70l40-40 110-10 30-20 80-10 30 20 60 10 20 25-20 25-60 10-30 20-80-10-30-20-110-10-40-40H10z' fill='%23ffffff' opacity='0.9'/></svg>");
+  animation: driftLeft 14s ease-in-out infinite alternate;
+}
+.racing-vehicles-bg .vehicle.moto {
+  right: -12%;
+  top: 8%;
+  width: 45vw;
+  height: 22vw;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 256' fill='none'><path d='M60 180l40-30 40 5 40-35 45 10 25-20 55 5 35 25-20 20-45 5-25 20-45-10-40 35-40-5-40 30z' fill='%23ffffff' opacity='0.9'/></svg>");
+  animation: driftRight 16s ease-in-out infinite alternate;
+}
+
+@keyframes driftLeft {
+  0% { transform: translateX(0) translateY(0) rotate(-1deg); }
+  100% { transform: translateX(4%) translateY(-2%) rotate(1deg); }
+}
+@keyframes driftRight {
+  0% { transform: translateX(0) translateY(0) rotate(1deg); }
+  100% { transform: translateX(-4%) translateY(2%) rotate(-1deg); }
+}
+
+/* Subtle moving tire tracks overlay */
+.tire-tracks-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.1) 80%);
+  animation: tracksSlide 12s linear infinite;
+  pointer-events: none;
+}
+@keyframes tracksSlide {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 200px 200px, -200px -200px; }
+}
+
+/* Sliding gradient sheen on headline */
+.sheen-text {
+  position: relative;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheenSlide 4s ease-in-out infinite;
+}
+@keyframes sheenSlide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Flame trail hover effect for CTAs */
+.btn-flame {
+  position: relative;
+  overflow: hidden;
+}
+.btn-flame::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -120%;
+  transform: translateY(-50%);
+  width: 120%;
+  height: 140%;
+  background: radial-gradient(ellipse at left, rgba(255,200,0,0.25), rgba(255,80,0,0.12) 40%, transparent 70%);
+  filter: blur(8px);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+.btn-flame:hover::after {
+  left: 120%;
+}
